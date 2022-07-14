@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ namespace DataAccess.Concrete.InMemory
         public InMemoryCarDal()  //Ctor
         {
             _cars = new List<Car> {
-             new Car{CarId=1, CarBrandId=2, CarColorId=3, CarDailyPrice=10 , CarDescription="2022 car.", CarModelYear=2022},
-             new Car{CarId=2, CarBrandId=3, CarColorId=4, CarDailyPrice=20, CarDescription="2021 car.", CarModelYear=2021},
-             new Car{CarId=3, CarBrandId=4, CarColorId=5, CarDailyPrice=30, CarDescription="2020 car.", CarModelYear=2021}
+             new Car{CarId=1, BrandId=2, ColorId=3, CarDailyPrice=10 , CarDescription="2022 car.", CarModelYear=2022},
+             new Car{CarId=2, BrandId=3, ColorId=4, CarDailyPrice=20, CarDescription="2021 car.", CarModelYear=2021},
+             new Car{CarId=3, BrandId=4, ColorId=5, CarDailyPrice=30, CarDescription="2020 car.", CarModelYear=2021}
             };
         }
         public void Add(Car car)
@@ -35,8 +36,8 @@ namespace DataAccess.Concrete.InMemory
         {
             //Gönderdiğim ürün idsine sahip olan Listedeki ürünü bul.
             Car carToUpdate = _cars.SingleOrDefault(c => car.CarId == car.CarId);
-            carToUpdate.CarBrandId = car.CarBrandId;
-            carToUpdate.CarColorId = car.CarColorId;
+            carToUpdate.BrandId = car.BrandId;
+            carToUpdate.ColorId = car.ColorId;
             carToUpdate.CarDailyPrice = car.CarDailyPrice;
             carToUpdate.CarDescription = car.CarDescription;
             carToUpdate.CarId = car.CarId;
@@ -60,6 +61,11 @@ namespace DataAccess.Concrete.InMemory
         }
 
         public Car GetById(Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetailDto> GetCarDetails()
         {
             throw new NotImplementedException();
         }
