@@ -10,7 +10,7 @@ namespace ConsoleUI2
         //Proje Referance -- Bütün katmanları işaretle.
         static void Main(string[] args)
         {
-            ////CarTest();
+            CarTest();
             //BrandManager brandManager = new BrandManager(new EfBrandDal());
             //foreach (var brand in brandManager.GetAll())
             //{
@@ -27,22 +27,26 @@ namespace ConsoleUI2
             //{
             //    Console.WriteLine(car.CarDescription + car.CarId);
             //}
-            CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetails())
-            {
-                Console.WriteLine("Car Name : " +car.CarName +" Brand Name : "+car.BrandName+" Color Name : "+car.ColorName+" Daily Price : "+car.DailyPrice );
-            }
+            //CarManager carManager = new CarManager(new EfCarDal());
+            //foreach (var car in carManager.GetCarDetails())
+            //{
+            //    Console.WriteLine("Car Name : " +car.CarName +" Brand Name : "+car.BrandName+" Color Name : "+car.ColorName+" Daily Price : "+car.DailyPrice );
+            //}
         }
 
         private static void CarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
             //Hangi veri yöntemiyle çalıştığını yazmamız gerekiyor.
-            foreach (var car in carManager.GetCarsByBrandId(2))  //BrandId=2 olanları listele
+            var result = carManager.GetCarDetails();
+            if (result.Success)
             {
-                Console.WriteLine(" Car Name : " + car.CarName + " Model Year : " + car.CarModelYear + "DailyPrice : " + car.CarDailyPrice);
-                
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarName + " " + car.ColorName);
+                }
             }
+            Console.WriteLine(result.Message);
         }
     }
 }
