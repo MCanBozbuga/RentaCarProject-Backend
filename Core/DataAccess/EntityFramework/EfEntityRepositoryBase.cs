@@ -55,8 +55,6 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
-        
-
         public TEntity GetById(Expression<Func<TEntity, bool>> filter)
         {
             using (TContext context = new TContext())
@@ -64,5 +62,13 @@ namespace Core.DataAccess.EntityFramework
                 return context.Set<TEntity>().SingleOrDefault(filter);
             }
         }
+        //public TEntity Get(Expression<Func<TEntity, bool>> filter = null)
+        //{
+        //    using (TContext context = new TContext())
+        //    {
+
+        //    }
+        //}
+
     }
 }

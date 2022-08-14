@@ -15,6 +15,7 @@ namespace Core.DataAccess
     {
         List<T> GetAll(Expression<Func<T, bool>> filter = null);  //Tüm ürünleri listele.Buradaki ''Car '' farklı bir katmandan gelecek.
                                                                   //Car' üstüne gelip ampülden Entities'den referansla.
+        //T Get(Expression<Func<T, bool>> filter = null);                                                        
         T GetById(Expression<Func<T, bool>> filter =null);
         void Add(T entity);                   
         void Delete(T entity);

@@ -7,6 +7,7 @@ using System.Text;
 
 namespace DataAccess.Abstract
 {
+    //Ürüne özel operasyonlar burada yapılacak.
     public interface ICarDal : IEntityRepository<Car>
     {
         /* DataAccess sağ tıkla.Add.Project References. DataAccess, Entities katmanını kullanabilecek. */

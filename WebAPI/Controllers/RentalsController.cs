@@ -9,35 +9,35 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
-    // 1. Adım constructor oluştur. Business'den alacağımız için IBrandService _brandService;
-    // Ampulden Genereta constructor oluşturulur.
-    // 2. Adım [HttpGet("getall")] gibi operasyonlarını oluştur.  =>  public IActionResult GetAll()
-    // 3. Adım  _brandService 'i sonuca ata.  => var result = _colorService.GetAll();
-    // 4. Adım if sonuc başarılı ise Ok döndğr , değilse BadRequest döndür.
-    // 5. Adım Add yaparken Color'ı using'e eklemelisin.
     [Route("api/[controller]")]
     [ApiController]
-    public class ColorsController : ControllerBase
+    public class RentalsController : ControllerBase
     {
-        IColorService _colorService;
-        public ColorsController(IColorService colorService)
+        // 1. Adım constructor oluştur. Business'den alacağımız için IBrandService _brandService;
+        // Ampulden Genereta constructor oluşturulur.
+        // 2. Adım [HttpGet("getall")] gibi operasyonlarını oluştur.  => public IActionResult GetAll()
+        // 3. Adım  _brandService 'i sonuca ata. var result = _colorService.GetAll();
+        // 4. Adım if sonuc başarılı ise Ok döndğr , değilse BadRequest döndür.   => if (result.Success)
+        // 5. Adım Add yaparken Color'ı using'e eklemelisin.
+        IRentalService _rentalService;
+        public RentalsController(IRentalService  rentalService)
         {
-            _colorService = colorService;
+            _rentalService = rentalService;
         }
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _colorService.GetAll();
+            var result = _rentalService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpGet("getbyid")]
-        public IActionResult GetByColorId(int colorId)
+        [HttpGet("getbyrentalid")]
+        public IActionResult GetByRentalId(int rentalId)
         {
-            var result = _colorService.GetByColorId(colorId);
+            var result = _rentalService.GetByRentalId(rentalId);
             if (result.Success)
             {
                 return Ok(result);
@@ -45,19 +45,20 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("add")]
-        public IActionResult Add(Color color)
+        public IActionResult Add(Rental rental)
         {
-            var result = _colorService.Add(color);
+            var result = _rentalService.Add(rental);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+
         [HttpPut("update")]
-        public IActionResult Update(Color color)
+        public IActionResult Update(Rental rental)
         {
-            var result = _colorService.Update(color);
+            var result = _rentalService.Update(rental);
             if (result.Success)
             {
                 return Ok(result);
@@ -67,9 +68,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("delete")]
-        public IActionResult Delete(Color color)
+        public IActionResult Delete(Rental rental)
         {
-            var result = _colorService.Delete(color);
+            var result = _rentalService.Delete(rental);
             if (result.Success)
             {
                 return Ok(result);

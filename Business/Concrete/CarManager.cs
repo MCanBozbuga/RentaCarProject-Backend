@@ -1,9 +1,13 @@
 ﻿using Business.Abstract;
 using Business.Contants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcers.Validation;
 using Core.Entities.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,14 +29,14 @@ namespace Business.Concrete
             // İş Kodlarını yaz
             //Yetkisi var mı, if ... , şartlardan geçerse ürünleri ver.
 
-            if (DateTime.Now.Hour==2)
+            if (DateTime.Now.Hour == 2)
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
         }
 
-        public IDataResult<Car> GetById(int carId)
+        public IDataResult<Car> GetByCarId(int carId)
         {
             return new SuccessDataResult<Car>(_carDal.GetById(c => c.CarId == carId));
         }
@@ -58,13 +62,16 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarUpdated);
             
         }
-
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-            if (car.CarName.Length<2)
-            {
-                return new ErrorResult(Messages.CarNameInvalid);
-            }
+            //if (car.CarName.Length<2)
+            //{
+            //    return new ErrorResult(Messages.CarNameInvalid);
+            //}
+            
+            ValidationTool.Validate(new CarValidator(), car);
+
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }

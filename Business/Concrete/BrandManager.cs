@@ -20,12 +20,12 @@ namespace Business.Concrete
         }
         public IDataResult<List<Brand>> GetAll()
         {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll()); //filtre vermedik hepsini getirmek için.
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.BrandListed); //filtre vermedik hepsini getirmek için.
         }
 
-        public IDataResult<List<Brand>> GetById(int id)
+        public IDataResult<Brand> GetByBrandId(int brandId)
         {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(b => b.BrandId == id));
+            return new SuccessDataResult<Brand>(_brandDal.GetById(b => b.BrandId == brandId));
         }
         public IResult Add(Brand brand)
         {
