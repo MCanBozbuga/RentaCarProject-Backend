@@ -39,9 +39,8 @@ namespace Business.Contants
         public static string UserUpdated = "Kişiler güncellendi";
         public static string UserDeleted = "Kişiler silindi";
 
-
-
-
+        public static string CarImageCountOfCarError = "Fazla resim";
+        public static string UploadImage = "Resim yüklendi.";
     }
     
 }
