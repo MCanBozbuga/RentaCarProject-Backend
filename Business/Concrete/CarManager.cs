@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspect.Autofac;
 using Business.Contants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -62,16 +63,10 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarUpdated);
             
         }
+        [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-            //if (car.CarName.Length<2)
-            //{
-            //    return new ErrorResult(Messages.CarNameInvalid);
-            //}
-            
-            ValidationTool.Validate(new CarValidator(), car);
-
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Contants
@@ -41,6 +42,15 @@ namespace Business.Contants
 
         public static string CarImageCountOfCarError = "Fazla resim";
         public static string UploadImage = "Resim yüklendi.";
+
+        public static string AuthorizationDenied = "Yetkiniz yok";
+
+        public static string UserRegistered = "Kayıt oldu.";
+        public static string UserNotFound = "Kullanıcı hatası";
+        public static string PasswordError = "Parola Hatası";
+        public static string SuccessfulLogin = "Başarılı giriş";
+        public static string UserAlreadyExists = "Kullanıcı mevcut";
+        public static string AccessTokenCreated = "Token oluşturuldu";
     }
     
 }
