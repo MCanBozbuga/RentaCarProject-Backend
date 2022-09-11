@@ -2,6 +2,8 @@
 using Business.BusinessAspect.Autofac;
 using Business.Contants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcers.Validation;
 using Core.Entities.Utilities.Results;
@@ -24,7 +26,7 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-
+        [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
             // İş Kodlarını yaz
@@ -56,15 +58,17 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id));
         }
-
+        [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car car)
         {
             _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
             
         }
-        [SecuredOperation("product.add,admin")]
+        //[SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
             _carDal.Add(car);
@@ -75,6 +79,11 @@ namespace Business.Concrete
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
             
+        }
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Car car)
+        {
+            return null;
         }
     }
 }

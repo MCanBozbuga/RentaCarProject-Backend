@@ -18,20 +18,19 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        public List<OperationClaim> GetClaims(User user)
         {
-            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
+            return _userDal.GetClaims(user);
         }
 
-        public IResult Add(User user)
+        public void Add(User user)
         {
             _userDal.Add(user);
-            return new SuccessResult();
         }
 
-        public IDataResult<User> GetByMail(string email)
+        public User GetByMail(string email)
         {
-            return new SuccessDataResult<User>(_userDal.GetAll(u => u.Email == email).FirstOrDefault());
+            return _userDal.GetById(u => u.Email == email);
         }
     }
 }

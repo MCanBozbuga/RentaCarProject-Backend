@@ -9,7 +9,7 @@ namespace Entities.Concrete
 {
     public class Car : IEntity
     {
-        public bool carName;
+        //public bool carName;
 
         public int CarId { get; set; }
         public string CarName { get; set; }
