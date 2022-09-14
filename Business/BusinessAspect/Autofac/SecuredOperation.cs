@@ -17,6 +17,7 @@ namespace Business.BusinessAspect.Autofac
         private string[] _roles;
         private IHttpContextAccessor _httpContextAccessor;
 
+        
         public SecuredOperation(string roles)
         {
             _roles = roles.Split(',');
@@ -27,6 +28,7 @@ namespace Business.BusinessAspect.Autofac
         protected override void OnBefore(IInvocation invocation)
         {
             var roleClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();
+            
             foreach (var role in _roles)
             {
                 if (roleClaims.Contains(role))

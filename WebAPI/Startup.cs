@@ -61,6 +61,7 @@ namespace WebAPI
             services.AddDependencyResolvers(new ICoreModule[] { 
                 new CoreModule()
             });
+            //services.AddHttpContextAccessor();
             //services.AddSingleton<ICarService, CarManager>();
             //services.AddSingleton<ICarDal, EfCarDal>();
 
