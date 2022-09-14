@@ -9,9 +9,9 @@ using System.Text;
 
 namespace Core.DataAccess.EntityFramework
 {
-    public class EfEntityRepositoryBase<TEntity, TContext>
+    public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
         where TEntity : class, IEntity, new()
-        where TContext : DbContext,new()
+        where TContext : DbContext, new()
     {
         public void Add(TEntity entity)
         {
@@ -56,7 +56,7 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
-        public TEntity GetById(Expression<Func<TEntity, bool>> filter)
+        public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
             using (TContext context = new TContext())
             {

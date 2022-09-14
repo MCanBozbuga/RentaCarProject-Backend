@@ -49,7 +49,7 @@ namespace Core.Utilities.Security.JWT
                 issuer: tokenOptions.Issuer,
                 audience: tokenOptions.Audience,
                 expires: _accessTokenExpiration,
-                notBefore: DateTime.Now, //Token'ın geçerlik süresi şuandan önceyse geçerli değil
+                notBefore: DateTime.UtcNow, //Token'ın geçerlik süresi şuandan önceyse geçerli değil
                 claims: SetClaims(user, operationClaims),
                 signingCredentials: signingCredentials
             );
@@ -59,7 +59,7 @@ namespace Core.Utilities.Security.JWT
         private IEnumerable<Claim> SetClaims(User user, List<OperationClaim> operationClaims)
         {
             var claims = new List<Claim>();
-            claims.AddNameIdentifier(user.UserId.ToString());
+            claims.AddNameIdentifier(user.Id.ToString());
             claims.AddEmail(user.Email);
             claims.AddName($"{user.FirstName} {user.LastName}");
             claims.AddRoles(operationClaims.Select(c => c.Name).ToArray());

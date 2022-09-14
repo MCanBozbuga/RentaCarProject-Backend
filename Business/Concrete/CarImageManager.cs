@@ -66,7 +66,7 @@ namespace Business.Concrete
 
         public IDataResult<CarImage> GetByImageId(int imageId)
         {
-            return new SuccessDataResult<CarImage>(_carImageDal.GetById(c => c.ImageId==imageId));        }
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.ImageId==imageId));        }
 
         private IResult CheckIfCarImageLimitExceded(int carId)
         {
